@@ -1,0 +1,52 @@
+type: object
+required:
+- nom
+- prenom
+properties:
+  id:
+    type: integer
+    format: int32
+    description: id technique de la personne
+  nom:
+    type: string
+    description: Nom de la personne
+  prenom:
+    type: string
+    description: Prénom de la personne
+  date_de_naissance:
+    type: string
+    format: yyyymmdd
+    description: Date de naissance
+  photo:
+    type: string
+    description: Url de la photo
+  mail_pro:
+    type: string
+    description: Mail professionnel
+  mail_perso:
+    type: string
+    description: Mail personnel
+  tel_pro:
+    type: string
+    description: Téléphone professionnel
+  tel_perso:
+    type: string
+    description: Téléphone personnel
+  poste:
+    type: string
+    description: Poste de la personne
+  description_libre:
+    type: string
+    description: Description libre
+example:
+  id: 1
+  nom: Dupont
+  prenom: Jean
+  date_de_naissance: 19800101
+  photo: http://monserveur.com/?photo=215848952
+  mail_pro: monmailpro@pro.com
+  mail_perso: monmailperso@perso.com
+  tel_pro: 0000000000
+  tel_perso: 1111111111
+  poste: super poste
+  description_libre: super mec
