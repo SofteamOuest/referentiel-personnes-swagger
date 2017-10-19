@@ -19,7 +19,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/definitions/schemas/Personne_ref'
+                  $ref: '#/definitions/schemas/Personne'
   /personnes/{id}:
     get:
       operationId: getPersonne
@@ -41,8 +41,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/schemas/Personne_ref'
+                $ref: '#/definitions/schemas/Personne'
 definitions:
   schemas:
-    Personne_ref:
+    Personne:
       $ref: ./schemas/personne.yaml

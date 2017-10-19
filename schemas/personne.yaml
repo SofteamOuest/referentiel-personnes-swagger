@@ -40,13 +40,13 @@ properties:
     description: Description libre
 example:
   id: 1
-  nom: Dupont
-  prenom: Jean
-  date_de_naissance: 19800101
-  photo: http://monserveur.com/?photo=215848952
-  mail_pro: monmailpro@pro.com
-  mail_perso: monmailperso@perso.com
-  tel_pro: 0000000000
-  tel_perso: 1111111111
-  poste: super poste
-  description_libre: super mec
+  nom: 'Dupont'
+  prenom: 'Jean'
+  date_de_naissance: '19800101'
+  photo: 'http://monserveur.com/?photo=215848952'
+  mail_pro: 'monmailpro@pro.com'
+  mail_perso: 'monmailperso@perso.com'
+  tel_pro: '0000000000'
+  tel_perso: '1111111111'
+  poste: 'super poste'
+  description_libre: 'super mec'
