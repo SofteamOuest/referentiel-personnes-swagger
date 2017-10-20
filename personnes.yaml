@@ -20,12 +20,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/schemas/Personne'
+    post:
+      operationId: createPersonne
+      summary: Création d'une personne
+      description: |-
+        Permet la création d'une personne
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/schemas/Personne'
+      responses:
+              '200':
+                description: |-
+                  La personne trouvé
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/definitions/schemas/Personne'
   /personnes/{id}:
     get:
       operationId: getPersonne
       summary: Recuperer personne
       description: |-
-        Recherche une personne via son identifiant.
+        Recherche une personne via son identifiant technique.
       parameters:
       - name: id
         in: path
@@ -42,6 +60,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/definitions/schemas/Personne'
+    delete:
+      operationId: deletePersonne
+      summary: Suppression d'une personne
+      description: |-
+        Suppression d'une personne via son identifiant technique.
+      parameters:
+      - name: id
+        in: path
+        description: |-
+          Identifiant de la personne
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: |-
+            La personne a été supprimé
 definitions:
   schemas:
     Personne:

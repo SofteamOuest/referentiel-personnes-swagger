@@ -14,10 +14,34 @@ Outils:
 Pour faciliter le développement, Swagger-ui a été intégré au projet.
 Pour l'utiliser il faut:
 - avoir Apache ou nginx
-- créer un virtualhost sur le répertoire "api"
+- créer un virtualhost sur le répertoire "referentiel-personnes-swagger"
+- ajouter les headers suivants au virtualhost:
+Access-Control-Allow-Origin "*"
+Access-Control-Allow-Methods "GET, POST, DELETE, PUT, PATCH, OPTIONS"
+Access-Control-Allow-Headers "Content-Type, api_key, Authorization"
+
+Example avec Apache:
+
+    <VirtualHost *:XXX>
+    	ServerName referentiel-personnes-swagger
+    	
+    	Header set Access-Control-Allow-Origin "*"
+    	Header set Access-Control-Allow-Methods "GET, POST, DELETE, PUT, PATCH, OPTIONS"
+    	Header set Access-Control-Allow-Headers "Content-Type, api_key, Authorization"
+    
+    	Alias "/" "...../referentiel-personnes-swagger/"
+    
+    	<Directory "...../referentiel-personnes-swagger/">
+    		AllowOverride All 
+    		Require all granted
+    	</Directory> 
+    </VirtualHost>
+
+
+
 
 Swagger-ui est accessible depuis l'url:
 http://localhost:port_virtual_host/swagger-ui/
 
-Ouvrir l'api http://localhost:85/personnes.yaml
+Ouvrir l'api http://localhost:XXX/personnes.yaml
 
