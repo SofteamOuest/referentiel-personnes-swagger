@@ -3,6 +3,11 @@ info:
   title: referentiel-personnes
   description: API du referentiel des personnes
   version: 1.0.0
+  licence:
+    name: Apache Licence 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://localhost:3000/api
 paths:
   /personnes:
     get:
@@ -31,13 +36,20 @@ paths:
             schema:
               $ref: '#/definitions/schemas/Personne'
       responses:
-              '200':
-                description: |-
-                  La personne trouvé
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/definitions/schemas/Personne'
+        '201':
+          description: |-
+            La personne a été créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/schemas/Personne'
+        '400':
+          description: |-
+            Erreur lors de la création de la personne
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/schemas/Erreur'
   /personnes/{id}:
     get:
       operationId: getPersonne
@@ -76,8 +88,50 @@ paths:
       responses:
         '200':
           description: |-
-            La personne a été supprimé
+            La personne a été supprimée
+        '400':
+          description: |-
+            Erreur lors de la création de la personne
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/schemas/Erreur'
+    put:
+      operationId: updatePersonne
+      summary: Modification d'une personne
+      description: |-
+        Permet la mise à jour d'une personne
+      parameters:
+        - name: id
+          in: path
+          description: |-
+            Identifiant de la personne
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/schemas/Personne'
+      responses:
+        '200':
+          description: |-
+            La personne a été mise à jour
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/schemas/Personne'
+        '400':
+          description: |-
+            Erreur lors de la modification de la personne
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/schemas/Erreur'
 definitions:
   schemas:
     Personne:
       $ref: ./schemas/personne.yaml
+    Erreur:
+      $ref: ./schemas/erreur.yaml
