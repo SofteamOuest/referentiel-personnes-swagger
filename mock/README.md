@@ -2,6 +2,10 @@
 
 ## Ces mock utilisent [json-server](https://github.com/typicode/json-server).
 
+Installer json-server:
+
+        npm install -g json-server
+
 Ce mock est configuré pour répondre au service
 
         GET     /api/personnes
