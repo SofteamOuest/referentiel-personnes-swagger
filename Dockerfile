@@ -9,6 +9,6 @@ ENV API_URL=http://referentiel-personnes-mock
 
 RUN chmod 755 /usr/share/nginx/docker-run.sh
 
-EXPOSE 3000
+EXPOSE 8080
 
 CMD /usr/share/nginx/docker-run.sh
