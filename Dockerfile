@@ -8,4 +8,7 @@ COPY schemas/ /usr/share/nginx/html/schemas
 ENV API_URL=http://referentiel-personnes-mock
 
 RUN chmod 755 /usr/share/nginx/docker-run.sh
+
+EXPOSE 3000
+
 CMD /usr/share/nginx/docker-run.sh
