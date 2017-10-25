@@ -7,7 +7,7 @@ info:
     name: Apache Licence 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-  - url: http://referentiel-personnes-mock/api
+  - url: https://meltingpoc.k8.wildwidewest.xyz/api-personnes-mock
 paths:
   /personnes:
     get:
