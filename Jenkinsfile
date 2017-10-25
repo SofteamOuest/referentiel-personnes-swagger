@@ -41,6 +41,39 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
 
 
+        container('docker') {
 
+                stage('build docker image'){
+
+
+
+
+                    sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger .'
+
+                    sh 'mkdir /etc/docker'
+
+                    // le registry est insecure (pas de https)
+                    sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+
+                    withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
+                         echo "My password is '${NEXUS_PWD}'!"
+
+                         sh "docker login -u admin -p ${NEXUS_PWD} registry.wildwidewest.xyz"
+                    }
+
+                    sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger'
+                }
+        }
+
+        container('kubectl') {
+
+            stage('deploy'){
+
+                //sh 'kubectl delete svc meltingpoc-api-personnes-swagger'
+                //sh 'kubectl delete deployment meltingpoc-api-personnes-swagger'
+                sh 'kubectl create -f kubernetes/meltingpoc-api-personnes-swagger.yml'
+
+            }
+        }
     }
 }
