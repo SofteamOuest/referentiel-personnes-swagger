@@ -2,7 +2,7 @@
 import java.text.SimpleDateFormat
 
 // pod utilisé pour la compilation du projet
-podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
+podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector: 'medium', containers: [
 
         // le slave jenkins
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
@@ -39,13 +39,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
             checkout scm;
         }
 
-
-
         container('docker') {
 
                 stage('build docker image'){
-
-
 
 
                     sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger .'
