@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: meltingpoc-mock
-        image: registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger
+        image: registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger
         ports:
         - containerPort: 8080
       imagePullSecrets:
