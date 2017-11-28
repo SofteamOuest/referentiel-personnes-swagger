@@ -65,9 +65,9 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
 
             stage('deploy'){
 
-                sh 'kubectl delete svc meltingpoc-api-personnes-swagger'
-                sh 'kubectl delete deployment meltingpoc-api-personnes-swagger'
-                sh 'kubectl create -f kubernetes/meltingpoc-api-personnes-swagger.yml'
+                sh 'kubectl delete svc meltingpoc-api-personnes-swagger || :'
+                sh 'kubectl delete deployment meltingpoc-api-personnes-swagger || :'
+                sh 'kubectl create -f kubernetes/meltingpoc-api-personnes-swagger.yml || :'
 
             }
         }
