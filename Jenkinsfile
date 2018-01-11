@@ -1,5 +1,5 @@
 #!groovy
-import java.text.SimpleDateFormat
+import java.text.*
 
 // pod utilisé pour la compilation du projet
 podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector: 'medium', containers: [
@@ -35,16 +35,20 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
                 )
             ])
 
+        def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
+
         stage('checkout sources'){
             checkout scm;
         }
+
+
 
         container('docker') {
 
                 stage('build docker image'){
 
 
-                    sh 'docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger .'
+                    sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger:$now ."
 
                     sh 'mkdir /etc/docker'
 
@@ -52,12 +56,11 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
                     sh 'echo {"insecure-registries" : ["registry.k8.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
                     withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
-                         echo "My password is '${NEXUS_PWD}'!"
 
                          sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
                     }
 
-                    sh 'docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger'
+                    sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger:$now"
                 }
         }
 
@@ -65,9 +68,9 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
 
             stage('deploy'){
 
-                sh 'kubectl delete svc meltingpoc-api-personnes-swagger || :'
-                sh 'kubectl delete deployment meltingpoc-api-personnes-swagger || :'
-                sh 'kubectl create -f kubernetes/meltingpoc-api-personnes-swagger.yml || :'
+                build job: "referentiel-personnes-swagger-run/master",
+                                  wait: false,
+                                  parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now"]]
 
             }
         }
