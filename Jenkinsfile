@@ -68,7 +68,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
 
             stage('deploy'){
 
-                build job: "referentiel-personnes-swagger-run/master",
+                build job: "/SofteamOuest/referentiel-personnes-swagger-run/master",
                                   wait: false,
                                   parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now"]]
 
