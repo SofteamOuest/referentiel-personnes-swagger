@@ -37,7 +37,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
 
         def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
 
-        stage('checkout sources'){
+        stage('CHECKOUT'){
             checkout scm;
         }
 
@@ -45,7 +45,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
 
         container('docker') {
 
-                stage('build docker image'){
+                stage('BUILD DOCKER IMAGE'){
 
 
                     sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes-swagger:$now ."
@@ -66,7 +66,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-swagger-pod', nodeSelector:
 
         container('kubectl') {
 
-            stage('deploy'){
+            stage('RUN'){
 
                 build job: "/SofteamOuest/referentiel-personnes-swagger-run/master",
                                   wait: false,
